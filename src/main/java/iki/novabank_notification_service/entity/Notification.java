@@ -27,7 +27,8 @@ public class Notification {
     private String transactionReference;
     @CreationTimestamp
     private LocalDateTime createdAt;
-
+    @Column(columnDefinition = "TEXT")
+    private String message;
     @PrePersist
     public void prePersist(){
         if(notificationType==null){
@@ -40,7 +41,7 @@ public class Notification {
 
     public Notification(Long id, String recipientEmail, String recipientPhone, NotificationType notificationType,
                         String subject, NotificationStatus notificationStatus, String transactionReference,
-                        LocalDateTime createdAt) {
+                        LocalDateTime createdAt, String message) {
         this.id = id;
         this.recipientEmail = recipientEmail;
         this.recipientPhone = recipientPhone;
@@ -49,10 +50,19 @@ public class Notification {
         this.notificationStatus = notificationStatus;
         this.transactionReference = transactionReference;
         this.createdAt = createdAt;
+        this.message = message;
     }
 
     public Notification(){
 
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getRecipientPhone() {
